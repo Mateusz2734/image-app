@@ -19,12 +19,12 @@
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     /* Path */
     "rootDir": "src",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@wails/*": ["@/../wailsjs/*"]
     }
   },
   "include": ["src"],
