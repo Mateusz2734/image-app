@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { LuX as X } from "react-icons/lu";
 
 import { Button } from "@/components/ui/button";
 import { getFileName } from "@/lib/utils";

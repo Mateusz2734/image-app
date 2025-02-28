@@ -30,7 +30,7 @@ export function FileUploader({ ...dropzoneProps }: React.HTMLAttributes<HTMLDivE
                                     Drag {`'n'`} drop files here
                                 </p>
                                 <p className="text-sm text-muted-foreground/70">
-                                    You can upload multuple files
+                                    You can upload multiple files
                                 </p>
                             </div>
                         </div>
