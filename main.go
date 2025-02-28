@@ -25,14 +25,16 @@ func main() {
 			Assets: assets,
 		},
 		OnStartup: app.startup,
-		Frameless: true,
 		Windows: &windows.Options{
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
 			BackdropType:         windows.Acrylic,
 		},
 		DragAndDrop: &options.DragAndDrop{
-			EnableFileDrop: true,
+			EnableFileDrop:     true,
+			DisableWebViewDrop: true,
+			CSSDropProperty:    "--wails-drop-target",
+			CSSDropValue:       "drop",
 		},
 		Bind: []interface{}{
 			app,
