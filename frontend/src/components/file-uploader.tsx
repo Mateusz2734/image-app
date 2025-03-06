@@ -3,7 +3,15 @@ import Dropzone from "react-dropzone";
 
 import { cn } from "@/lib/utils";
 
-export function FileUploader({ ...dropzoneProps }: React.HTMLAttributes<HTMLDivElement>) {
+import { FileCard } from "@/components/file-card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+
+interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
+    files: string[];
+    onRemove: (file: string) => void;
+}
+export function FileUploader({ files, onRemove, ...dropzoneProps }: FileUploaderProps) {
     return (
         <Dropzone>
             {({ getRootProps, isDragActive }) => (
@@ -11,30 +19,29 @@ export function FileUploader({ ...dropzoneProps }: React.HTMLAttributes<HTMLDivE
                     style={{ "--wails-drop-target": "drop" } as React.CSSProperties}
                     {...getRootProps()}
                     className={cn(
-                        "group relative grid h-32 place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-5 py-2.5 text-center transition",
+                        "group relative grid h-48 place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-2 py-2 text-center transition",
                         "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                         isDragActive && "border-muted-foreground/50"
                     )}
                     {...dropzoneProps}
                 >
-                    {isDragActive ? (
-                        <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
-                            <p className="font-medium text-muted-foreground">
-                                Drop the files here
-                            </p>
+                    <div className="flex flex-col items-center justify-center sm:px-2 h-12">
+                        <p className="font-bold text-muted-foreground text-xs">
+                            {isDragActive ? "Drop here." : "Drag and drop files here. They will be listed below."}
+                        </p>
+                    </div>
+                    <Separator />
+                    <ScrollArea className="h-24 w-full px-3 overflow-hidden py-1">
+                        <div className="flex flex-col h-full gap-2">
+                            {files?.map((file, index) => (
+                                <FileCard
+                                    key={index}
+                                    file={file}
+                                    onRemove={onRemove}
+                                />
+                            ))}
                         </div>
-                    ) : (
-                        <div className="flex flex-col items-center justify-center gap-4 sm:px-5">
-                            <div className="flex flex-col gap-px">
-                                <p className="font-medium text-muted-foreground">
-                                    Drag {`'n'`} drop files here
-                                </p>
-                                <p className="text-sm text-muted-foreground/70">
-                                    You can upload multiple files
-                                </p>
-                            </div>
-                        </div>
-                    )}
+                    </ScrollArea>
                 </div>
             )}
         </Dropzone>

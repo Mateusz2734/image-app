@@ -35,16 +35,7 @@ const Slider = React.forwardRef<
       <span className="text-sm font-bold ml-4">
         {currentValue[0]}
       </span>
-
-      {/* <div className="flex justify-between mt-1 ml-1/2 text-xs text-white">
-        <span>{props.min}</span>
-        
-        <span>{props.max}</span>
-      </div>
-      <div className="mt-2  mx-auto">
-      </div> */}
     </div>
-
   );
 });
 Slider.displayName = SliderPrimitive.Root.displayName;

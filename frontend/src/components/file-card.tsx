@@ -5,7 +5,7 @@ import { getFileName } from "@/lib/utils";
 
 interface FileCardProps {
     file: string;
-    onRemove: () => void;
+    onRemove: (file: string) => void;
 }
 
 export function FileCard({ file, onRemove }: FileCardProps) {
@@ -14,7 +14,7 @@ export function FileCard({ file, onRemove }: FileCardProps) {
             <div className="flex flex-1 gap-2.5">
                 <div className="flex w-full flex-col gap-2">
                     <div className="flex flex-col gap-px">
-                        <p className="line-clamp-1 text-sm font-medium text-foreground/80">
+                        <p className="line-clamp-1 text-xs font-medium text-start text-foreground/80 truncate">
                             {getFileName(file)}
                         </p>
                     </div>
@@ -26,7 +26,7 @@ export function FileCard({ file, onRemove }: FileCardProps) {
                     variant="outline"
                     size="icon"
                     className="size-7"
-                    onClick={onRemove}
+                    onClick={() => onRemove(file)}
                 >
                     <X className="size-4" aria-hidden="true" />
                     <span className="sr-only">Remove file</span>
