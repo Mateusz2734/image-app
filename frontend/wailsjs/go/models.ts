@@ -1,7 +1,7 @@
 export namespace main {
 	
 	export enum Format {
-	    jpeg = "jpg",
+	    JPEG = "jpg",
 	    EBP = "ebp",
 	    PNG = "png",
 	    TIFF = "tiff",
