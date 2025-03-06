@@ -1,34 +1,31 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { FaCompressArrowsAlt, FaFileImage } from "react-icons/fa";
 
 import { Sidebar, SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar";
 
 
 export default function AppSidebar() {
-    const [activeIcon, setActiveIcon] = useState<string>("home");
+    const [active, setActive] = useState<string>("home");
 
-    const handleIconClick = (iconName: string) => {
-        setActiveIcon(iconName);
+    const handleClick = (iconName: string) => {
+        setActive(iconName);
     };
 
     return (
         <Sidebar collapsible="none">
             <SidebarMenu className="h-screen flex flex-col items-center justify-center">
-                <SidebarMenuButton asChild
-                    isActive={activeIcon === "home"}
-                    onClick={() => handleIconClick("home")}
-                    aria-label="Change Type"
-                >
-                    <FaFileImage />
-                </SidebarMenuButton>
+                <Link to="/" onClick={() => handleClick("home")}>
+                    <SidebarMenuButton asChild isActive={active === "home"} aria-label="Change Type">
+                        <FaFileImage />
+                    </SidebarMenuButton>
+                </Link>
 
-                <SidebarMenuButton asChild
-                    isActive={activeIcon === "compress"}
-                    onClick={() => handleIconClick("compress")}
-                    aria-label="Compress Images"
-                >
-                    <FaCompressArrowsAlt />
-                </SidebarMenuButton>
+                {/* <Link to="/compress" onClick={() => handleClick("compress")}>
+                    <SidebarMenuButton asChild isActive={active === "compress"} aria-label="Compress Images">
+                        <FaCompressArrowsAlt />
+                    </SidebarMenuButton>
+                </Link> */}
             </SidebarMenu>
         </Sidebar>
     );
