@@ -12,18 +12,14 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 
-import { cn } from "@/lib/utils";
+import { cn, getFileName } from "@/lib/utils";
+import { validateFile } from "@/lib/validation";
 import { EventsEmit, OnFileDrop } from "@wails/runtime";
 import { main } from "@wails/go/models";
 
 const formats = Object.keys(main.Format);
 
 function sendToBackend(files: string[]) {
-    if (files.length === 0) {
-        toast.error("Nothing to process. Please upload some files.");
-        return;
-    }
-
     EventsEmit("process-request", files);
 }
 
@@ -31,7 +27,17 @@ export default function MainPage() {
     const [files, setFiles] = useState<string[]>([]);
 
     const onDrop = (_x: number, _y: number, paths: string[]) => {
-        setFiles((prevFiles) => Array.from(new Set([...paths, ...prevFiles])));
+        const invalidFiles = paths.filter((path) => !validateFile(path));
+        invalidFiles.forEach((file) => {
+            const fileName = getFileName(file);
+            if (fileName) {
+                toast.error(`Invalid file: ${fileName}`);
+            }
+        });
+
+        const validFiles = paths.filter((path) => validateFile(path));
+
+        setFiles((prevFiles) => Array.from(new Set([...validFiles, ...prevFiles])));
     };
 
     useEffect(() => {
@@ -46,7 +52,7 @@ export default function MainPage() {
             <div className="w-[12rem] flex flex-col items-center justify-between h-full">
                 <Select>
                     <SelectTrigger className="w-[11rem]">
-                        <SelectValue placeholder="Image type" />
+                        <SelectValue placeholder="Convert to..." />
                     </SelectTrigger>
                     <SelectContent>
                         {formats.map((format) => (

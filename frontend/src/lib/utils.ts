@@ -12,3 +12,15 @@ export function normalizePath(path: string) {
 export function getFileName(path: string) {
   return normalizePath(path).split("/").pop();
 }
+
+export function inverseTruncate(input: string | undefined, length: number) {
+  if (!input) {
+    return "";
+  }
+
+  if (input.length <= length) {
+    return input;
+  }
+
+  return `...${input.substring(input.length - length)}`;
+}

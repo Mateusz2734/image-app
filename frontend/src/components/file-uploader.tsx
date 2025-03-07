@@ -19,7 +19,7 @@ export function FileUploader({ files, onRemove, ...dropzoneProps }: FileUploader
                     style={{ "--wails-drop-target": "drop" } as React.CSSProperties}
                     {...getRootProps()}
                     className={cn(
-                        "group relative grid h-48 place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-2 py-2 text-center transition",
+                        "group relative grid h-48 place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-[2px] text-center transition",
                         "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                         isDragActive && "border-muted-foreground/50"
                     )}
@@ -31,7 +31,7 @@ export function FileUploader({ files, onRemove, ...dropzoneProps }: FileUploader
                         </p>
                     </div>
                     <Separator />
-                    <ScrollArea className="h-24 w-full px-3 overflow-hidden py-1">
+                    <ScrollArea className="h-32 w-full overflow-hidden py-[1px]">
                         <div className="flex flex-col h-full gap-2">
                             {files?.map((file, index) => (
                                 <FileCard
