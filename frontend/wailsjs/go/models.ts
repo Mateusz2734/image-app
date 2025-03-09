@@ -2,15 +2,11 @@ export namespace main {
 	
 	export enum Format {
 	    JPEG = "jpg",
-	    EBP = "ebp",
 	    PNG = "png",
 	    TIFF = "tiff",
+	    WEBP = "webp",
 	    GIF = "gif",
-	    PDF = "pdf",
-	    SVG = "svg",
-	    MAGICK = "magick",
-	    HEIF = "heif",
-	    AVIF = "avif",
+	    BMP = "bmp",
 	}
 
 }

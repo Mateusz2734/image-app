@@ -10,18 +10,21 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 
-import { cn, getFileName } from "@/lib/utils";
+import { getFileName } from "@/lib/utils";
 import { validateFile } from "@/lib/validation";
-import { EventsEmit, OnFileDrop } from "@wails/runtime";
 import { main } from "@wails/go/models";
+import { EventsEmit, EventsOn, OnFileDrop, OnFileDropOff } from "@wails/runtime";
 
 const formats = Object.keys(main.Format);
 
 function sendToBackend(files: string[]) {
-    EventsEmit("process-request", files);
+    EventsEmit("req(process)", JSON.stringify(files || []));
 }
+
+EventsOn("error", (data: string) => {
+    toast.error(data);
+});
 
 export default function MainPage() {
     const [files, setFiles] = useState<string[]>([]);
@@ -42,11 +45,15 @@ export default function MainPage() {
 
     useEffect(() => {
         OnFileDrop(onDrop, true);
-    }, []);
+
+        return () => {
+            OnFileDropOff();
+        };
+    });
 
     return (
         <div className="flex flex-row items-center">
-            <div className="w-[12rem]">
+            <div className="w-[24rem]">
                 <FileUploader files={files} onRemove={(file) => setFiles((prevFiles) => prevFiles.filter((f) => f !== file))} />
             </div>
             <div className="w-[12rem] flex flex-col items-center justify-between h-full">
@@ -63,24 +70,9 @@ export default function MainPage() {
                     </SelectContent>
                 </Select>
 
-                <div className="text-muted-foreground text-sm">Quality (%)
-                    <Slider defaultValue={[50]} min={0} max={100} step={1} className="w-[11rem]" />
-                </div>
-
                 <Button className="w-[11rem]" disabled={files?.length === 0} onClick={() => { sendToBackend(files); }}>
                     Process
                 </Button>
-            </div>
-
-            <div className="w-[12rem]">
-                <div
-                    style={{ "--wails-drop-target": "drop" } as React.CSSProperties}
-                    className={cn(
-                        "group relative grid h-48 place-items-center rounded-lg border-2 border-dashed border-muted-foreground/25 px-2 py-2 text-center transition",
-                        "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    )}
-                >
-                </div>
             </div>
         </div>
     );
