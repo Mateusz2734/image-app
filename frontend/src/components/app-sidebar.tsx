@@ -21,11 +21,11 @@ export default function AppSidebar() {
                     </SidebarMenuButton>
                 </Link>
 
-                {/* <Link to="/compress" onClick={() => handleClick("compress")}>
+                <Link to="/compress" onClick={() => handleClick("compress")}>
                     <SidebarMenuButton asChild isActive={active === "compress"} aria-label="Compress Images">
                         <FaCompressArrowsAlt />
                     </SidebarMenuButton>
-                </Link> */}
+                </Link>
             </SidebarMenu>
         </Sidebar>
     );

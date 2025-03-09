@@ -15,7 +15,7 @@ export function FileCard({ file, onRemove }: FileCardProps) {
                 <div className="flex w-full flex-col">
                     <div className="flex flex-col gap-px">
                         <p className="line-clamp-1 text-xs font-medium text-start text-foreground/80 truncate">
-                            {inverseTruncate(getFileName(file), 20)}
+                            {inverseTruncate(getFileName(file), 48)}
                         </p>
                     </div>
                 </div>
