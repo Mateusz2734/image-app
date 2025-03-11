@@ -9,6 +9,10 @@ EventsOn("error", (data: string) => {
     toast.error(data);
 });
 
+EventsOn("info", (data: string) => {
+    toast.info(data);
+});
+
 export default function Layout() {
     return (
         <SidebarProvider className="h-full w-full">

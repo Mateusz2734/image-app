@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"sync"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -9,6 +10,8 @@ import (
 // App struct
 type App struct {
 	ctx context.Context
+
+	wg sync.WaitGroup
 }
 
 // NewApp creates a new App application struct

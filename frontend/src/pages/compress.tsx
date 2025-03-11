@@ -27,7 +27,7 @@ export default function CompressPage() {
             files={files}
             setFiles={setFiles}
             buttonText="Compress"
-            buttonDisabled={files.length === 0}
+            buttonDisabled={files.length === 0 || !value}
             process={() => sendToBackend(files, qualities[value as keyof typeof qualities])}
         >
             <Select onValueChange={(format) => setValue(format)} value={value}>

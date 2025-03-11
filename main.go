@@ -20,8 +20,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:         "image-app",
-		Width:         660,
-		Height:        250,
+		Width:         460,
+		Height:        300,
 		DisableResize: true,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
@@ -34,6 +34,9 @@ func main() {
 		Mac: &mac.Options{
 			WebviewIsTransparent: true,
 			WindowIsTranslucent:  true,
+			TitleBar: &mac.TitleBar{
+				HideTitle: true,
+			},
 		},
 		DragAndDrop: &options.DragAndDrop{
 			EnableFileDrop:     true,
@@ -46,6 +49,7 @@ func main() {
 		},
 		EnumBind: []interface{}{
 			allFormats,
+			allQualities,
 		},
 	})
 
