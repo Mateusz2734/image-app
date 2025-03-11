@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os/exec"
+)
 
 func CompressFile(file string, quality Quality) error {
 	fmt.Println(file, quality)
@@ -8,6 +11,5 @@ func CompressFile(file string, quality Quality) error {
 }
 
 func ConvertFile(file string, format Format) error {
-	fmt.Println(file, format)
-	return nil
+	return exec.Command("ffmpeg", "-i", file, "-y", NewExtension(file, format)).Run()
 }

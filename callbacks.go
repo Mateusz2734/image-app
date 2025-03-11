@@ -45,7 +45,7 @@ func (a *App) processRequestCallback(optionalData ...interface{}) {
 	})
 
 	successCount := len(valid) - errCount
-	runtime.EventsEmit(a.ctx, "info", fmt.Sprintf("%d out of %d files compressed successfully.", successCount, len(req.Files)))
+	runtime.EventsEmit(a.ctx, "success", fmt.Sprintf("%d out of %d files converted successfully.", successCount, len(req.Files)))
 }
 
 func (a *App) compressRequestCallback(optionalData ...interface{}) {
@@ -74,7 +74,7 @@ func (a *App) compressRequestCallback(optionalData ...interface{}) {
 	})
 
 	successCount := len(valid) - errCount
-	runtime.EventsEmit(a.ctx, "info", fmt.Sprintf("%d out of %d files compressed successfully.", successCount, len(req.Files)))
+	runtime.EventsEmit(a.ctx, "success", fmt.Sprintf("%d out of %d files compressed successfully.", successCount, len(req.Files)))
 }
 
 func checkData(optionalData ...interface{}) (string, error) {

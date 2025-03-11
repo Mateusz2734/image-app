@@ -9,8 +9,8 @@ EventsOn("error", (data: string) => {
     toast.error(data);
 });
 
-EventsOn("info", (data: string) => {
-    toast.info(data);
+EventsOn("success", (data: string) => {
+    toast.success(data);
 });
 
 export default function Layout() {
