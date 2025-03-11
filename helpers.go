@@ -10,7 +10,11 @@ func ValidateFiles(files []string) (valid []string, invalid []string) {
 	validFiles := make([]string, 0, len(files))
 
 	for _, file := range files {
-		if ToFormat(path.Ext(file)[1:]) == UNDEFINED {
+		ext := path.Ext(file)
+
+		if ext == "" {
+			invalidFiles = append(invalidFiles, file)
+		} else if ToFormat(ext[1:]) == UNDEFINED {
 			invalidFiles = append(invalidFiles, file)
 		} else {
 			validFiles = append(validFiles, file)
