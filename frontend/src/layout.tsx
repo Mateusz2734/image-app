@@ -1,7 +1,13 @@
 import { Outlet } from "react-router";
+import { toast } from "sonner";
 
+import { EventsOn } from "@wails/runtime";
 import Sidebar from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+
+EventsOn("error", (data: string) => {
+    toast.error(data);
+});
 
 export default function Layout() {
     return (

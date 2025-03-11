@@ -1,17 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router";
 import { FaCompressArrowsAlt, FaFileImage } from "react-icons/fa";
+import { Link, useLocation } from "react-router";
 
 import { Sidebar, SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar";
-import { TooltipProvider, TooltipTrigger, Tooltip, TooltipContent } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 export default function AppSidebar() {
-    const [active, setActive] = useState<string>("home");
-
-    const handleClick = (iconName: string) => {
-        setActive(iconName);
-    };
+    const { pathname } = useLocation();
 
     return (
         <Sidebar collapsible="none">
@@ -19,8 +14,8 @@ export default function AppSidebar() {
                 <SidebarMenu className="h-screen flex flex-col items-center justify-center">
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Link to="/" onClick={() => handleClick("home")}>
-                                <SidebarMenuButton asChild isActive={active === "home"} aria-label="Change Type">
+                            <Link to="/">
+                                <SidebarMenuButton asChild isActive={pathname === "/"} aria-label="Change Type">
                                     <FaFileImage />
                                 </SidebarMenuButton>
                             </Link>
@@ -32,8 +27,8 @@ export default function AppSidebar() {
 
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Link to="/compress" onClick={() => handleClick("compress")}>
-                                <SidebarMenuButton asChild isActive={active === "compress"} aria-label="Compress Images">
+                            <Link to="/compress">
+                                <SidebarMenuButton asChild isActive={pathname === "/compress"} aria-label="Compress Images">
                                     <FaCompressArrowsAlt />
                                 </SidebarMenuButton>
                             </Link>
