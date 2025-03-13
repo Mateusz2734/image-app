@@ -1,6 +1,7 @@
 package main
 
 import (
+	"hash/fnv"
 	"path"
 	"strings"
 )
@@ -26,4 +27,10 @@ func ValidateFiles(files []string) (valid []string, invalid []string) {
 
 func NewExtension(file string, format Format) string {
 	return strings.TrimSuffix(file, path.Ext(file)) + "." + string(format)
+}
+
+func FilenameHash(s string) uint32 {
+	h := fnv.New32a()
+	h.Write([]byte(s))
+	return h.Sum32()
 }
